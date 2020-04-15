@@ -12,9 +12,9 @@ const {
 // I have installed lodash to find data or change data easily
 
 let books = [
-  { name: "Name of the Wind", genre: "Fantazy", id: "1" },
-  { name: "The Final Empire", genre: "Fantazy", id: "2" },
-  { name: "The Long Earth", genre: "Sci-Fi", id: "3" },
+  { name: "Name of the Wind", genre: "Fantazy", id: "1", authorId: "1" },
+  { name: "The Final Empire", genre: "Fantazy", id: "2", authorId: "2" },
+  { name: "The Long Earth", genre: "Sci-Fi", id: "3", authorId: "3" },
 ];
 
 let authors = [
@@ -29,6 +29,12 @@ const BookType = new GraphQLObjectType({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
     genre: { type: GraphQLString },
+    author: {
+      type: AuthorType,
+      resolve(parent, args) {
+        return _.find(authors, { id: parent.authorId });
+      },
+    },
   }),
 });
 
