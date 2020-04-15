@@ -10,7 +10,6 @@ const {
 } = graphql;
 
 // I have installed lodash to find data or change data easily
-
 let books = [
   { name: "Name of the Wind", genre: "Fantazy", id: "1", authorId: "1" },
   { name: "The Final Empire", genre: "Fantazy", id: "2", authorId: "2" },
@@ -23,6 +22,17 @@ let authors = [
   { name: "Terry Pratchett", age: 63, id: "3" },
 ];
 
+// Type Relation that I am looking for
+// {
+//   book(id: 2){
+//     name
+//     genre
+//     author{
+//       name
+//       age
+//     }
+//   }
+// }
 const BookType = new GraphQLObjectType({
   name: "Book",
   fields: () => ({
@@ -31,6 +41,9 @@ const BookType = new GraphQLObjectType({
     genre: { type: GraphQLString },
     author: {
       type: AuthorType,
+      // the parent is the book with coresponding book(id:2) that
+      // we are searching for, and it has access to all the book properties
+      // (name, genre, id, authorId)
       resolve(parent, args) {
         return _.find(authors, { id: parent.authorId });
       },
