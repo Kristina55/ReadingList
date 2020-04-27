@@ -7,6 +7,7 @@ const {
   GraphQLSchema,
   GraphQLID,
   GraphQLInt,
+  GraphQLList,
 } = graphql;
 
 // I have installed lodash to find data or change data easily
@@ -14,6 +15,9 @@ let books = [
   { name: "Name of the Wind", genre: "Fantazy", id: "1", authorId: "1" },
   { name: "The Final Empire", genre: "Fantazy", id: "2", authorId: "2" },
   { name: "The Long Earth", genre: "Sci-Fi", id: "3", authorId: "3" },
+  { name: "The Hero of Ages", genre: "Fantasy", id: "4", authorId: "2" },
+  { name: "The Color of Magic", genre: "Fantasy", id: "5", authorId: "3" },
+  { name: "The Light Fantastic", genre: "Fantasy", id: "6", authorId: "3" },
 ];
 
 let authors = [
@@ -45,6 +49,7 @@ const BookType = new GraphQLObjectType({
       // we are searching for, and it has access to all the book properties
       // (name, genre, id, authorId)
       resolve(parent, args) {
+        console.log(parent);
         return _.find(authors, { id: parent.authorId });
       },
     },
@@ -57,6 +62,12 @@ const AuthorType = new GraphQLObjectType({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
     age: { type: GraphQLInt },
+    books: {
+      type: new GraphQLList(BookType),
+      resolve(parent, args) {
+        return _.filter(books, { authorId: parent.id });
+      },
+    },
   }),
 });
 
