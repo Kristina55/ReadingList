@@ -1,14 +1,15 @@
 import React from "react";
 import ApolloClient from "apollo-boost";
+// to bind apollo to react using "react-apollo" package
 import { ApolloProvider } from "react-apollo";
 
 //components
 import BookList from "./components/BookList";
 
 //apollo client setup
-
+// prettier-ignore
 const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql",
+  uri: "http://localhost:4000/graphql"
 });
 
 function App() {

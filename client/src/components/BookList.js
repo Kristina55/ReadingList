@@ -1,14 +1,19 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
-// import uuid from "uuid/v4";
+import { gql } from "apollo-boost";
+// to bind apollo to react using "react-apollo" package
+import { graphql } from "react-apollo";
 
-class BookList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+const getBooksQuery = gql`
+  {
+    books {
+      name
+      id
+    }
   }
-
+`;
+class BookList extends Component {
   render() {
+    console.log(this.props);
     return (
       <div>
         <ul id="book-list">
@@ -18,5 +23,6 @@ class BookList extends Component {
     );
   }
 }
-
-export default BookList;
+// bind the query to the component and have access in props
+// of the data that comes back from the query
+export default graphql(getBooksQuery)(BookList);

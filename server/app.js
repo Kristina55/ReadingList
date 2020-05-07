@@ -4,6 +4,10 @@ const graphqlHTTP = require("express-graphql");
 const schema = require("./schema/schema");
 const mongoose = require("mongoose");
 const app = express();
+const cors = require("cors");
+
+//allow cross-origin requests
+app.use(cors());
 
 const uri =
   "mongodb+srv://Kristina:test123@cluster0-gickw.mongodb.net/test?retryWrites=true&w=majority";
