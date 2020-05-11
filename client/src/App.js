@@ -5,6 +5,7 @@ import { ApolloProvider } from "react-apollo";
 
 //components
 import BookList from "./components/BookList";
+import AddBook from "./components/AddBook";
 
 //apollo client setup
 // prettier-ignore
@@ -20,6 +21,7 @@ function App() {
       <div id="main">
         <h1>Reading List</h1>
         <BookList />
+        <AddBook />
       </div>
     </ApolloProvider>
   );
