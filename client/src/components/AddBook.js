@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 // to bind apollo to react using "react-apollo" package
 import { graphql } from "react-apollo";
-import { getAuthorsQuery } from "../queries/queries";
+import { flowRight as compose } from "lodash";
+import { getAuthorsQuery, addBookMutation } from "../queries/queries";
 
 class AddBook extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class AddBook extends Component {
     };
   }
   displayAuthors() {
-    let data = this.props.data;
+    let data = this.props.getAuthorsQuery;
     if (data.loading) {
       return <option>Loading authors....</option>;
     } else {
@@ -35,7 +36,7 @@ class AddBook extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.addBookMutation();
   };
   render() {
     const { name, genre } = this.state;
@@ -73,4 +74,7 @@ class AddBook extends Component {
 }
 // bind the query to the component and have access in props
 // of the data that comes back from the query
-export default graphql(getAuthorsQuery)(AddBook);
+export default compose(
+  graphql(getAuthorsQuery, { name: "getAuthorsQuery" }),
+  graphql(addBookMutation, { name: "addBookMutation" })
+)(AddBook);
