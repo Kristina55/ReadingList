@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 // to bind apollo to react using "react-apollo" package
 import { graphql } from "react-apollo";
 import { flowRight as compose } from "lodash";
@@ -8,7 +8,7 @@ import {
   getBooksQuery,
 } from "../queries/queries";
 
-class AddBook extends Component {
+class AddBook extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
