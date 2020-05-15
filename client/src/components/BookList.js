@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 // to bind apollo to react using "react-apollo" package
 import { graphql } from "react-apollo";
 import { getBooksQuery } from "../queries/queries";
@@ -6,7 +6,7 @@ import { getBooksQuery } from "../queries/queries";
 // components
 import BookDetails from "./BookDetails";
 
-class BookList extends Component {
+class BookList extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,6 +35,12 @@ class BookList extends Component {
 
   render() {
     const { selected } = this.state;
+
+    // we have two data objects in console
+    // the first one because React first loads (renders) in the browser
+    // so the Query is going in the background without the data
+    // when we get data returned from the server it updates the props object
+    // React re-renders and we have acces books array
     return (
       <div>
         <ul id="book-list">{this.displayBooks()}</ul>

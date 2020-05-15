@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 // to bind apollo to react using "react-apollo" package
 import { graphql } from "react-apollo";
 import { getBookQuery } from "../queries/queries";
 
-class BookDetails extends Component {
+class BookDetails extends React.PureComponent {
   displayBookDetails() {
     const { book } = this.props.data;
     if (book) {

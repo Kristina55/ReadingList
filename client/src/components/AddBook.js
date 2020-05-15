@@ -46,6 +46,7 @@ class AddBook extends React.PureComponent {
         genre: this.state.genre,
         authorId: this.state.authorId,
       },
+      // to update the list of books immediately, not on refresh
       refetchQueries: [{ query: getBooksQuery }],
     });
   };

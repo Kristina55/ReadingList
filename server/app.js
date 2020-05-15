@@ -6,7 +6,9 @@ const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
 
-//allow cross-origin requests
+// the server is not allowing requests frm another origin
+// so install CORS to allow cross-origin requests
+// server (4000) client (3000)
 app.use(cors());
 
 const uri =
